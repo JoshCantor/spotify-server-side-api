@@ -5,6 +5,7 @@ app.set('view engine', 'ejs');
 
 var routes = require('./controllers/routes.js');
 
+//where does the following line belong?
 app.set('view engine', 'ejs');
 
 var bodyParser = require('body-parser');
