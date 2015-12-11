@@ -1,8 +1,17 @@
 var express = require('express');
+
 var app = express();
 app.set('view engine', 'ejs');
+
 var routes = require('./controllers/routes.js');
+
 app.set('view engine', 'ejs');
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());       
+app.use(bodyParser.urlencoded({    
+  extended: true
+}));
 
 routes(app);
 
