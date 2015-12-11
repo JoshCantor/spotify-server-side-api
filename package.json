@@ -1,0 +1,24 @@
+{
+  "name": "spotify-albums-and-tracks-server-side-remix",
+  "version": "1.0.0",
+  "description": "Spotify has a wondeful public API. Lets explore API usage using music because music is awesome. Your task will be to explore some of the endpoints that Spotify offers us. You'll want the documentation:",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshCantor/spotify-albums-and-tracks-server-side-remix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshCantor/spotify-albums-and-tracks-server-side-remix/issues"
+  },
+  "homepage": "https://github.com/JoshCantor/spotify-albums-and-tracks-server-side-remix#readme",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.13.3"
+  }
+}
