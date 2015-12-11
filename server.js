@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+var request = require('request');
+
 routes(app);
 
 var server = app.listen(3000, function () {
