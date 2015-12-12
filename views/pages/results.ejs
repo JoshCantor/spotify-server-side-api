@@ -8,8 +8,18 @@
 		<% include ../partials/header %>
 	</header>
 		<h1>Search Results...</h1>
+		<br>
+		<ul>
+			<% artists.forEach(function(artist) {%>
+				<li><a href='<%= artist.href %>'><%= artist.name %></a></li>
+				<% }) %>
+		</ul>
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
 </body>
 </html>
+
+
+
+
