@@ -19,10 +19,13 @@ function routes(app) {
 	            res.status(500).send("Something went wrong! Status: " + response.statusCode);
 	        }
 	        if (!error && response.statusCode === 200) {
-	            var artists = JSON.parse(body);
-	            console.log(artists);
-	            // var result = "Artists" + artists. + "<br>";
-	            // res.send(result);
+	            var artistList = JSON.parse(body).artists.items;
+	            res.render('../views/pages/results');
+	            artistList.forEach(function(artistObj) {
+	            	// console.log(artistObj);
+	            	// var currentArtist = $('<a href='+ artist.href + '>' + artist.name + '</a>')
+	            	// $('.searchResults').append(currentArtist)
+	            }) 
 	        }
 	    });
 	});
