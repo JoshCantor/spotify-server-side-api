@@ -7,9 +7,18 @@
 	<header>
 		<% include ../partials/header %>
 	</header>
-		<h1>Artist Info</h1>
+		<h1>Albums by <%= artist %></h1>
+		<ul>
+			<% albums.forEach(function(album) { %>
+				<li>
+					<h3><%= album.name %></h3>
+					<img src='<%= album.images[1].url %>'>
+				</li>
+			<% }) %>
+		</ul> 
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
 </body>
 </html>
+

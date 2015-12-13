@@ -10,10 +10,10 @@
 		<h1>Search Results...</h1>
 		<br>
 		<ul>
-			<% artists.forEach(function(artist) {%>
-				<li><a href='<%= artist.href %>'><%= artist.name %></a></li>
+			<% artists.forEach(function(artist) { %>
+				<li><a href='<%= artist.name.toLowerCase().split(" ").join("-") %>/<%= artist.id %>'><%= artist.name %></a></li>
 				<% }) %>
-		</ul>
+		</ul> 
 	<footer>
 		<% include ../partials/footer %>
 	</footer>

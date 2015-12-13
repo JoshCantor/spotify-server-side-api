@@ -1,20 +1,18 @@
 var express = require('express');
-
 var app = express();
-app.set('view engine', 'ejs');
-
 var routes = require('./controllers/routes.js');
+var bodyParser = require('body-parser');
+var request = require('request');
+
+app.set('view engine', 'ejs');
 
 //where does the following line belong?
 app.set('view engine', 'ejs');
 
-var bodyParser = require('body-parser');
 app.use(bodyParser.json());       
 app.use(bodyParser.urlencoded({    
   extended: true
 }));
-
-var request = require('request');
 
 routes(app);
 
