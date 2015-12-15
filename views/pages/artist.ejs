@@ -9,9 +9,10 @@
 	</header>
 		<h1>Albums by <%= artist %></h1>
 		<ul>
-			<% albums.forEach(function(album) { %>
+			<% albums.forEach(function(album, index) { %>
 				<li>
 					<h3><%= album.name %></h3>
+					<h6>(Released: <%= albumReleaseDates[index] %> )</h6>
 					<img src='<%= album.images[1].url %>'>
 				</li>
 			<% }) %>
