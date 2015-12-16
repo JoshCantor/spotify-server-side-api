@@ -8,7 +8,6 @@ function routes(app) {
 
 	app.post("/search", function (req, res) {
 		var search = req.body.artistSearch.toString().split(' ').join('-');
-		console.log(search);
     	request.get("https://api.spotify.com/v1/search?type=artist&q=" + search, function(error, response, body) {
 	        if (error) {
 	            res.status(500).send("You got an error - " + error);
@@ -41,34 +40,11 @@ function routes(app) {
 	        }
 	        if (!error && response.statusCode === 200) {
 	        	var albums = JSON.parse(body).items,
-	        		albumReleaseDates = [],
-	        		trackAccumulator = []; 
-	        	albums.forEach(function(album) {
-	        		request.get("https://api.spotify.com/v1/albums/" + album.id, function(error, response, body) {
-	        	        if (error) {
-	        	            res.status(500).send("You got an error - " + error);
-	        	        } else if (!error && response.statCode >= 300) {
-	        	            res.status(500).send("Something went wrong! Status: " + response.statusCode);
-	        	        }
-	        	        if (!error && response.statusCode === 200) {
-	        	        	var releaseDate = JSON.parse(body).release_date,
-	        	        		trackList = JSON.parse(body).tracks.items,
-	        	        		tracks = getTracks(trackList, trackAccumulator);
-	        	        		if (trackAccumulator.length === trackList.length) {
-	        	        			console.log(trackAccumulator);
-	        	        		}
-	        	        	albumReleaseDates.push(releaseDate);
-	        	        	if (albumReleaseDates.length === albums.length) {
-	        		        	res.render('../views/pages/artist', {
-	        		        		artist: artist,
-	        		        		albums: albums,
-	        		        		albumReleaseDates: albumReleaseDates,
-	        		        		tracks
-	        		        	}) ;
-	        				};
-	        	        }
-	        	    });
-	        	});
+	        		albumData = {
+	        			name: artist,
+	        			allAlbumAndTrackData: []			
+	        		};
+	        	getAlbumInfo(res, albumData, albums);	
 	        }
 	    });
 	});
@@ -78,17 +54,46 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-function getTracks(trackList, trackAccumulator) {
-	var tracks = {
-		list: []
-	};
+function parseAlbumData(body, albumData) {
+	var albumName = JSON.parse(body).name.toString(),
+		releaseDate = JSON.parse(body).release_date,
+		trackList = JSON.parse(body).tracks.items,
+		album = {};
+		
+		album.name = albumName;
+		album.tracks = [];
+	
 	trackList.forEach(function(track) {
-		tracks.list.push(track.name);
+		album.releaseDate = releaseDate;
+		album.tracks.push(track.name);
 	})
-	trackAccumulator.push(tracks);
-	return tracks;
+	albumData.allAlbumAndTrackData.push(album);
+	return album;
 };
 
 
+function renderPage(res, albumData, albums) {
+	if (albumData.allAlbumAndTrackData.length === albums.length) {
+    	res.render('../views/pages/artist', {
+    		albumData: albumData,
+    	}) ;
+	};
+};
+
+function getAlbumInfo(res, albumData, albums) {
+	albums.forEach(function(album) {
+		request.get("https://api.spotify.com/v1/albums/" + album.id, function(error, response, body) {
+	        if (error) {
+	            res.status(500).send("You got an error - " + error);
+	        } else if (!error && response.statCode >= 300) {
+	            res.status(500).send("Something went wrong! Status: " + response.statusCode);
+	        }
+	        if (!error && response.statusCode === 200) { 	
+	        		parseAlbumData(body, albumData);
+	        		renderPage(res, albumData, albums);
+	        }
+	    });
+	});
+}
 
 module.exports = routes;

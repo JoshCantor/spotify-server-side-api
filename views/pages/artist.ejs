@@ -7,13 +7,13 @@
 	<header>
 		<% include ../partials/header %>
 	</header>
-		<h1>Albums by <%= artist %></h1>
+		<h1>Albums by <%= albumData.name %></h1>
 		<ul>
-			<% albums.forEach(function(album, index) { %>
+			<% albumData.allAlbumAndTrackData.forEach(function(album) { %>
 				<li>
 					<h3><%= album.name %></h3>
-					<h6>(Released: <%= albumReleaseDates[index] %> )</h6>
-					<img src='<%= album.images[1].url %>'>
+					<h6>(Released: <%= album.releaseDate %> )</h6>
+					
 				</li>
 			<% }) %>
 		</ul> 
