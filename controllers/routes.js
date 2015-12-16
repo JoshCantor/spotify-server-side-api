@@ -58,13 +58,15 @@ function parseAlbumData(body, albumData) {
 	var albumName = JSON.parse(body).name.toString(),
 		releaseDate = JSON.parse(body).release_date,
 		trackList = JSON.parse(body).tracks.items,
+		coverArtUrl = JSON.parse(body).images[1].url,
 		album = {};
-		
+
 		album.name = albumName;
 		album.tracks = [];
 	
 	trackList.forEach(function(track) {
 		album.releaseDate = releaseDate;
+		album.coverArtUrl = coverArtUrl;
 		album.tracks.push(track.name);
 	})
 	albumData.allAlbumAndTrackData.push(album);
@@ -74,6 +76,7 @@ function parseAlbumData(body, albumData) {
 
 function renderPage(res, albumData, albums) {
 	if (albumData.allAlbumAndTrackData.length === albums.length) {
+		console.log(albumData.allAlbumAndTrackData);
     	res.render('../views/pages/artist', {
     		albumData: albumData,
     	}) ;

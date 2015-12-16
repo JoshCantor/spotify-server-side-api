@@ -13,7 +13,12 @@
 				<li>
 					<h3><%= album.name %></h3>
 					<h6>(Released: <%= album.releaseDate %> )</h6>
-					
+					<img src='<%= album.coverArtUrl %>'>
+					<ol>
+						<% album.tracks.forEach(function(track) { %>
+							<li><%= track %></li>
+						<% }) %>
+					</ol> 
 				</li>
 			<% }) %>
 		</ul> 
