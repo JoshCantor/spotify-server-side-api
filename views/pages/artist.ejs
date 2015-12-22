@@ -7,21 +7,19 @@
 	<header>
 		<% include ../partials/header %>
 	</header>
-		<h1>Albums by <%= albumData.name %></h1>
-		<ul>
-			<% albumData.allAlbumAndTrackData.forEach(function(album) { %>
-				<li>
-					<h3><%= album.name %></h3>
-					<h6>(Released: <%= album.releaseDate %> )</h6>
-					<img src='<%= album.coverArtUrl %>'>
-					<ol>
-						<% album.tracks.forEach(function(track) { %>
-							<li><%= track %></li>
-						<% }) %>
-					</ol> 
-				</li>
-			<% }) %>
-		</ul> 
+		<h1>Albums by <%= artist %></h1>
+		<% for (albumId in albumInfo) { %>
+			<% var album = albumInfo[albumId] %>
+			<h3><%= album.albumName %></h3>
+			<img src='<%= album.coverArt %>'>
+			<h6>(Released: <%= album.releaseDate %> )</h6>
+			<ol>
+				<% album.tracks.forEach(function(track) { %>
+					<li><%= track.name %>  (Popularity: <%= track.popularity %>)</li>
+					
+				<% }) %>
+			</ol>
+		<%	} %>
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
