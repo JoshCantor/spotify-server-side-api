@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var app = express();
 var routes = require('./controllers/routes.js');
@@ -6,8 +7,6 @@ var request = require('request');
 
 app.set('view engine', 'ejs');
 
-//where does the following line belong?
-app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());       
 app.use(bodyParser.urlencoded({    
