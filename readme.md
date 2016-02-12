@@ -2,4 +2,4 @@ I used the Spotify API and Express framework to explore building a server-side a
 
 The app was originally built without promises (through commit 967fbfb0e46a48ff58464b2c09ec6688125a499d) and later refactored. 
 
-To launch app, clone repo and run ```node server.js``` and navigate to localhost:3000.
+To launch app, clone repo, run ```node server.js``` and navigate to localhost:3000.
