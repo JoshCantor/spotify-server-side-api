@@ -1,7 +1,12 @@
+"use strict";
 var request = require('request');
 var prettyJson = require('prettyjson');
 
 function routes(app) {
+	app.get('/', function(req, res) {
+		res.redirect('/search');
+	});
+
 	app.get('/search', function(req, res) {
 		res.render('../views/pages/search');
 	});
